@@ -2,4 +2,4 @@
 *.tlog
 *idb
 *.pdb
-*.Build.CppClean.log
+*.log
