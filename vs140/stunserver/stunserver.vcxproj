@@ -20,6 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\webrtc\examples\stunprober\main.cc" />
+    <ClCompile Include="..\..\webrtc\p2p\stunprober\stunprober.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\webrtc\p2p\stunprober\stunprober.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6C12DFF3-80B0-43F3-814A-ED4DA5443EBE}</ProjectGuid>

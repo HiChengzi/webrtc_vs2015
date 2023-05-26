@@ -18,5 +18,13 @@
     <ClCompile Include="..\..\webrtc\examples\stunprober\main.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\webrtc\p2p\stunprober\stunprober.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\webrtc\p2p\stunprober\stunprober.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
