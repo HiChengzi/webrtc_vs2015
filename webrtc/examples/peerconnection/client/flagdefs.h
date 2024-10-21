@@ -13,7 +13,9 @@
 #pragma once
 
 #include "webrtc/base/flags.h"
+#include "defaults.h"
 
+extern const char kDefaultServerAddr[];  // From defaults.[h|cc]
 extern const uint16_t kDefaultServerPort;  // From defaults.[h|cc]
 
 // Define flags for the peerconnect_client testing tool, in a separate
@@ -23,12 +25,9 @@ extern const uint16_t kDefaultServerPort;  // From defaults.[h|cc]
 DEFINE_bool(help, false, "Prints this message");
 DEFINE_bool(autoconnect, false, "Connect to the server without user "
                                 "intervention.");
-#define HUJIANHUA      1
-#if HUJIANHUA
-DEFINE_string(server, "10.150.90.104", "The server to connect to.");
-#else
-DEFINE_string(server, "localhost", "The server to connect to.");
-#endif
+
+DEFINE_string(server, kDefaultServerAddr, "The server to connect to.");
+
 DEFINE_int(port, kDefaultServerPort,
            "The port on which the server is listening.");
 DEFINE_bool(autocall, false, "Call the first available other client on "

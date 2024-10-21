@@ -24,7 +24,8 @@
 const char kAudioLabel[] = "audio_label";
 const char kVideoLabel[] = "video_label";
 const char kStreamLabel[] = "stream_label";
-const uint16_t kDefaultServerPort = 8888;
+const char kDefaultServerAddr[] = PEER_SERVER_ADDR;
+const uint16_t kDefaultServerPort = PEER_LISTEN_PORT;
 
 std::string GetEnvVarOrDefault(const char* env_var_name,
                                const char* default_value) {
@@ -44,11 +45,7 @@ std::string GetPeerConnectionString() {
 }
 
 std::string GetDefaultServerName() {
-#if JANUS_FLAG
-  return GetEnvVarOrDefault("WEBRTC_SERVER", "10.150.90.104");
-#else
-  return GetEnvVarOrDefault("WEBRTC_SERVER", "localhost");
-#endif
+    return GetEnvVarOrDefault("WEBRTC_SERVER", PEER_SERVER_ADDR);
 }
 
 std::string GetPeerName() {

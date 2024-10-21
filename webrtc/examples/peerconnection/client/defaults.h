@@ -20,9 +20,13 @@
 //hujianhua
 #define JANUS_FLAG                         1
 
+#define PEER_SERVER_ADDR    "localhost"
+#define PEER_LISTEN_PORT    8888
+
 extern const char kAudioLabel[];
 extern const char kVideoLabel[];
 extern const char kStreamLabel[];
+extern const char kDefaultServerAddr[];
 extern const uint16_t kDefaultServerPort;
 
 std::string GetEnvVarOrDefault(const char* env_var_name,

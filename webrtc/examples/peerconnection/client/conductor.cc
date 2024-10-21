@@ -34,6 +34,34 @@ const char kSessionDescriptionSdpName[] = "sdp";
 #define DTLS_ON  true
 #define DTLS_OFF false
 
+#ifdef WIN32
+class GlobalConfig {
+public:
+    GlobalConfig() {
+        HANDLE hMutex = ::CreateMutex(nullptr, false, L"PeerConnectClient");
+        if (hMutex && ERROR_ALREADY_EXISTS == ::GetLastError()) {
+            CloseHandle(hMutex);
+            hMutex = NULL;
+        }
+        hHandle = hMutex;
+    }
+    ~GlobalConfig() {
+        if (hHandle != NULL) {
+            CloseHandle(hHandle);
+            hHandle = NULL;
+        }
+    }
+    bool IsFirstInstance() {
+        return hHandle == NULL;
+    }
+private:
+    HANDLE hHandle;
+};
+GlobalConfig g_GlobalConfig;
+#define IS_FIRSt_INSTANCE   (g_GlobalConfig.IsFirstInstance())
+#endif // WIN32
+
+
 class DummySetSessionDescriptionObserver
     : public webrtc::SetSessionDescriptionObserver {
  public:
@@ -376,6 +404,7 @@ std::unique_ptr<cricket::VideoCapturer> Conductor::OpenVideoCaptureDevice() {
     }
     int num_devices = info->NumberOfDevices();
     for (int i = 0; i < num_devices; ++i) {
+      if (i == 0 && IS_FIRSt_INSTANCE) continue;
       const uint32_t kSize = 256;
       char name[kSize] = {0};
       char id[kSize] = {0};
