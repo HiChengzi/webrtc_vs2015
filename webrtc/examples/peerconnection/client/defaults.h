@@ -34,5 +34,6 @@ std::string GetEnvVarOrDefault(const char* env_var_name,
 std::string GetPeerConnectionString();
 std::string GetDefaultServerName();
 std::string GetPeerName();
+bool IsFirstInstance();
 
 #endif  // WEBRTC_EXAMPLES_PEERCONNECTION_CLIENT_DEFAULTS_H_

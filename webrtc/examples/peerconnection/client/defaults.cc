@@ -59,3 +59,33 @@ std::string GetPeerName() {
   }
   return ret;
 }
+
+
+#ifdef WIN32
+class GlobalConfig {
+public:
+    GlobalConfig() {
+        HANDLE hMutex = ::CreateMutex(nullptr, false, L"PeerConnectClient");
+        if (hMutex && ERROR_ALREADY_EXISTS == ::GetLastError()) {
+            CloseHandle(hMutex);
+            hMutex = NULL;
+        }
+        hHandle = hMutex;
+    }
+    ~GlobalConfig() {
+        if (hHandle != NULL) {
+            CloseHandle(hHandle);
+            hHandle = NULL;
+        }
+    }
+    bool IsFirstInstance() {
+        return hHandle != NULL;
+    }
+private:
+    HANDLE hHandle;
+};
+GlobalConfig g_GlobalConfig;
+bool IsFirstInstance() {
+    return g_GlobalConfig.IsFirstInstance();
+}
+#endif // WIN32
