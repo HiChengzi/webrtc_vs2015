@@ -377,7 +377,7 @@ std::unique_ptr<cricket::VideoCapturer> Conductor::OpenVideoCaptureDevice() {
     }
     int num_devices = info->NumberOfDevices();
     for (int i = 0; i < num_devices; ++i) {
-      if (i == 0 && !IsFirstInstance()) continue;
+      if (i == 0 && IsFirstInstance()) continue;
       const uint32_t kSize = 256;
       char name[kSize] = {0};
       char id[kSize] = {0};

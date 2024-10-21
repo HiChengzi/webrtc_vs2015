@@ -17,6 +17,7 @@
 #include "webrtc/api/mediaconstraintsinterface.h"
 #include "webrtc/base/arraysize.h"
 #include "webrtc/base/checks.h"
+#include "webrtc/media/base/videocommon.h"
 
 using cricket::CaptureState;
 using webrtc::MediaConstraintsInterface;
@@ -225,6 +226,8 @@ const cricket::VideoFormat& GetBestCaptureFormat(
   int best_diff_area = std::abs(default_area - it->width * it->height);
   int64_t best_diff_interval = kDefaultFormat.interval;
   for (; it != formats.end(); ++it) {
+    if (it->fourcc == cricket::FOURCC_MJPG)
+        continue;
     int diff_area = std::abs(default_area - it->width * it->height);
     int64_t diff_interval = std::abs(kDefaultFormat.interval - it->interval);
     if (diff_area < best_diff_area ||
